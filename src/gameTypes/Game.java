@@ -64,16 +64,12 @@ public class Game {
     }
 
     private Fighter createFighter(int choice, String name) {
-        switch (choice) {
-            case 1:
-                return new Elf(name);
-            case 2:
-                return new Archer(name);
-            case 3:
-                return new Orc(name);
-            default:
-                throw new IllegalArgumentException("This fighter choice is not available.");
-        }
+        return switch (choice) {
+            case 1 -> new Elf(name);
+            case 2 -> new Archer(name);
+            case 3 -> new Orc(name);
+            default -> throw new IllegalArgumentException("This fighter choice is not available.");
+        };
     }
 
     private Weapon chooseWeapon(Fighter fighter) {

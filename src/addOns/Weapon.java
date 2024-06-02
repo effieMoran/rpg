@@ -1,6 +1,5 @@
 package addOns;
 
-// Weapon.java
 public class Weapon {
     private String name;
     private int attackPower;
