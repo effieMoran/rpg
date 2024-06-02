@@ -1,38 +1,64 @@
+import characters.Archer;
+import characters.Elf;
+import characters.Orc;
+import characters.Character;
+
+// Battle.java
 import java.util.Scanner;
 
 public class Battle {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter name for Elf:");
-        String elfName = scanner.nextLine();
-        Character elf = new Elf(elfName);
+        // Character selection for Player 1
+        System.out.println("Player 1, choose your character (1: Elf, 2: Archer, 3: Orc):");
+        int choice1 = scanner.nextInt();
+        scanner.nextLine();  // Consume newline
+        System.out.println("Enter name for Player 1's character:");
+        String name1 = scanner.nextLine();
+        Character player1 = createCharacter(choice1, name1);
 
-        System.out.println("Enter name for Orc:");
-        String orcName = scanner.nextLine();
-        Character orc = new Orc(orcName);
+        // Character selection for Player 2
+        System.out.println("Player 2, choose your character (1: Elf, 2: Archer, 3: Orc):");
+        int choice2 = scanner.nextInt();
+        scanner.nextLine();  // Consume newline
+        System.out.println("Enter name for Player 2's character:");
+        String name2 = scanner.nextLine();
+        Character player2 = createCharacter(choice2, name2);
 
+        // Battle
         System.out.println("Battle Start!");
-        System.out.println(elf.getName() + " vs " + orc.getName());
+        System.out.println(player1.getName() + " vs " + player2.getName());
 
-        while (elf.getHealth() > 0 && orc.getHealth() > 0) {
-            elf.attack(orc);
-            System.out.println(orc.getName() + " has " + orc.getHealth() + " health left.");
-
-            if (orc.getHealth() <= 0) {
-                System.out.println(orc.getName() + " is defeated!");
+        while (player1.getHealth() > 0 && player2.getHealth() > 0) {
+            player1.attack(player2);
+            System.out.println(player2.getName() + " has " + player2.getHealth() + " health left.");
+            if (player2.getHealth() <= 0) {
+                System.out.println(player2.getName() + " is defeated!");
                 break;
             }
 
-            orc.attack(elf);
-            System.out.println(elf.getName() + " has " + elf.getHealth() + " health left.");
-
-            if (elf.getHealth() <= 0) {
-                System.out.println(elf.getName() + " is defeated!");
+            player2.attack(player1);
+            System.out.println(player1.getName() + " has " + player1.getHealth() + " health left.");
+            if (player1.getHealth() <= 0) {
+                System.out.println(player1.getName() + " is defeated!");
                 break;
             }
         }
 
         scanner.close();
+    }
+
+    public static Character createCharacter(int choice, String name) {
+        switch (choice) {
+            case 1:
+                return new Elf(name);
+            case 2:
+                return new Archer(name);
+            case 3:
+                return new Orc(name);
+            default:
+                throw new IllegalArgumentException("Not a valid character");
+        }
     }
 }

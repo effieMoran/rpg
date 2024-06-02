@@ -1,3 +1,5 @@
+package characters;
+
 public class Orc extends Character {
     public Orc(String name) {
         super(name, 120, 10);
