@@ -72,7 +72,7 @@ public class Game {
             case 3:
                 return new Orc(name);
             default:
-                throw new IllegalArgumentException("Invalid choice");
+                throw new IllegalArgumentException("This fighter choice is not available.");
         }
     }
 
